@@ -20,6 +20,31 @@ export const FeedbackProvider = ({children})=>{
             rating: 8
         }
     ])
+
+    const [feedbackEdit, setFeedbackEdit] = useState({
+        item:{},
+        edit:false
+    })
+
+    //update feedback item
+    const updateFeedback = (id, updItem) => {
+        console.log(updItem)
+        setFeedback(
+            //{...item, ...updItem}
+            //would have the id and then just be overwriting the text and rating
+            feedback.map((item)=>(item.id === id ? {...item, ...updItem} : item))
+        )
+    }
+
+    //set item to be updated
+    const editFeedback = (item) => {
+        setFeedbackEdit({
+            item,
+            edit:true
+        })
+    }
+
+
     const deleteFeedback = (id) => {
         if(window.confirm('Are u sure to delete?')){
             setFeedback(feedback.filter(item=>item.id!== id))
@@ -32,8 +57,11 @@ export const FeedbackProvider = ({children})=>{
     }
     return <FeedbackContext.Provider value={{
         feedback,
+        feedbackEdit,
         deleteFeedback,
-        addFeedback
+        addFeedback,
+        editFeedback,
+        updateFeedback
     }}>
         {children}
     </FeedbackContext.Provider>
