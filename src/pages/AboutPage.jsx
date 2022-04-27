@@ -11,7 +11,6 @@ function AboutPage() {
                 </p>
             </div>
       </Card>
-
   )
 }
 
